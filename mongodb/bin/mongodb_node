@@ -21,7 +21,7 @@ class VCAP::Services::MongoDB::NodeBin < VCAP::Services::Base::NodeBin
   end
 
   def additional_config(options, config)
-    options[:config_template] = File.expand_path("../../resources/mongodb.conf.erb", __FILE__)
+    options[:config_template] = parse_property(config, "config_template", String, :optional => true) || File.expand_path("../../resources/mongodb.conf.erb", __FILE__)
     options[:port_range] = parse_property(config, "port_range", Range)
     options[:mongod_path] = parse_property(config, "mongod_path", Hash)
     options[:mongorestore_path] = parse_property(config, "mongorestore_path", Hash)
